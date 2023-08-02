@@ -23,70 +23,42 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- preloader area start -->
-<div class="preloader" id="preloader">
-	<div class="preloader-inner">
-		<div class="spinner">
-			<div class="dot1"></div>
-			<div class="dot2"></div>
-		</div>
-	</div>
-</div>
-<!-- preloader area end -->
-
-<!-- search popup start-->
-<div class="body-overlay" id="body-overlay"></div>
-<div class="td-search-popup" id="td-search-popup">
-	<form action="home.html" class="search-form">
-		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Search.....">
-		</div>
-		<button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
-	</form>
-</div>
-<!-- search popup end-->
-
 <div id="page" class="site">
+
+    <!-- preloader area start -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader area end -->
+
+    <!-- search popup start-->
+    <div class="body-overlay" id="body-overlay"></div>
+    <div class="td-search-popup" id="td-search-popup">
+        <form action="home.html" class="search-form">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search.....">
+            </div>
+            <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    <!-- search popup end-->
+
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'capacitacion-pedro' ); ?></a>
-
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$capacitacion_pedro_description = get_bloginfo( 'description', 'display' );
-			if ( $capacitacion_pedro_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $capacitacion_pedro_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
-
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'capacitacion-pedro' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
 
 	<!-- navbar start -->
     <header class="navbar-area">
         <div class="navbar-top">
             <div class="logo d-none d-lg-block">
-                <a class="main-logo" href="index.html"><img src="assets/img/logo.png" alt="img"></a>
+                <a class="main-logo" href="<?php echo esc_attr( esc_url( home_url( ( '/' ) ) ) ); ?>">
+                <img src="<?php 
+                echo esc_attr( esc_url( get_template_directory_uri(  ) ) );
+                ?>/assets/img/logo.png" alt="img">
+                </a>
             </div>
             <div class="nav-phone-wrap">
                 <i class="fas fa-phone-alt"></i>
@@ -132,7 +104,7 @@
                     </button>
                 </div>
                 <div class="logo">
-                    <a href="index.html"><img src="assets/img/logo-2.png" alt="img"></a>
+                    <a href="<?php echo esc_attr( esc_url( home_url( '/' ) ) ); ?>"><img src="<?php echo esc_url( get_template_directory_uri(  ) );?>/assets/img/logo-2.png" alt="img"></a>
                 </div>
                 <div class="nav-left-part">
                       
@@ -147,7 +119,23 @@
                       </span> Get A Quote
                     </a>
                 </div>
-                <div class="collapse navbar-collapse" id="transpro_main_menu">
+                <?php
+                    /**
+                     * Register the main menu
+                     * 
+                     * @link https://developer.wordpress.org/reference/functions/wp_nav_menu/
+                     * @since 1.0.0
+                     * 
+                     * @package Capacitacion_Pedro
+                     */
+                    wp_nav_menu( array(
+                        'theme_location' => 'menu-1',
+                        'container_id'        => 'transpro_main_menu',
+                        'container_class'     => 'collapse navbar-collapse',
+                        'menu_class'          => 'navbar-nav menu-open'
+                    ) );
+                ?>
+                <!-- <div class="collapse navbar-collapse" id="transpro_main_menu">
                     <ul class="navbar-nav menu-open">
                         <li class="menu-item-has-children current-menu-item">
                             <a href="#">Home</a>
@@ -189,7 +177,7 @@
                         </li>
                         <li><a href="contact.html">Contact Us</a></li>
                     </ul>
-                </div>
+                </div> -->
                 <div class="nav-right-part nav-right-part-desktop">
                     <a class="search-bar-btn" href="#">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
