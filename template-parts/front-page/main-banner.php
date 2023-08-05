@@ -14,28 +14,40 @@
 <!-- banner start -->
 <div class="banner-area banner-area-1">
     <div class="banner-slider owl-carousel">
-        <!-- Item del banner repetible -->
-        <div class="item" style="background: url(<?php echo esc_attr( esc_html( get_post_meta( get_the_ID(  ), 'imagen_fondo', true ) ) ); ?>);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-md-8">
-                        <div class="banner-inner style-white">
-                            <h1 class="b-animate-2 title">
-                                <?php echo esc_html( get_post_meta( get_the_ID(  ), 'banner_metabox_title', true ) ); ?>
-                            </h1><!-- agregar a cmb2 -->
-                            <p class="b-animate-3 content">
-                                <?php echo esc_html( get_post_meta( get_the_ID(  ), 'banner_metabox_subtitle', true ) ); ?>
-                            </p><!-- agregar a CMB2 -->
-                            <div class="btn-wrap">
-                                <a class="btn btn-base b-animate-4" href="service.html"> Explore The Services</a><!-- agregar texto y url a cmb2 -->
-                                <a class="btn btn-white b-animate-4" href="contact.html">Contact Us</a><!-- agregar texto y url a cmb2 -->
+        <?php
+        $slides = get_post_meta( get_the_ID(  ), 'banner_group_metabox_group', true );
+
+        if( isset( $slides ) && !empty( $slides ) ):
+
+            foreach( $slides as $slide ):
+            ?>
+            <!-- Item del banner repetible -->
+            <div class="item" style="background: url();">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-8">
+                            <div class="banner-inner style-white">
+                                <h1 class="b-animate-2 title">
+                                    <?php echo esc_html( $slide['title'] ); ?>
+                                </h1>
+                                <p class="b-animate-3 content">
+                                    <?php echo esc_html( $slide['description'] ); ?>
+                                </p>
+                                <div class="btn-wrap">
+                                    <a class="btn btn-base b-animate-4" href="<?php echo esc_attr( $slide['url_one'] ); ?>"><?php echo esc_html( $slide['button_one'] ); ?></a>
+                                    <a class="btn btn-base b-animate-4" href="<?php echo esc_attr( $slide['url_two'] ); ?>"><?php echo esc_html( $slide['button_two'] ); ?></a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Item del banner repetible end -->
+            <!-- Item del banner repetible end -->
+            <?php
+            endforeach;
+            
+        endif;
+        ?>
     </div>
 </div>
 <!-- banner end -->  
